@@ -21,11 +21,11 @@ def bar_coordinates(hista, threshold, binsa,  resolution, acc,
 	colors_2 = []
 	#Get the counts for each class for each column on the histogram
 	target_acc = acc.score.as_matrix()
-	print(target_acc)
+	#print(target_acc)
 
 	# create this as a percentage
 	target_hist = []
-	print(binsa)
+	#print(binsa)
 
 	for cnt in range(0,len(target_acc),2):
 		target_hist.append( (target_acc[cnt]/ ( target_acc[cnt] + target_acc[cnt+1])))

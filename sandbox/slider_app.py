@@ -8,9 +8,9 @@ import plotly.graph_objs as go
 import pandas as pd
 import numpy as np
 
-import metric_calculations as mc
-import methods as mt
-import build_data as bd
+from src.metrics_calculator import metrics_calculator as mc
+from src.data_builder import data_builder as bd
+from src.methods import methods as mt
 
 app = dash.Dash()
 

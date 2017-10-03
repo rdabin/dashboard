@@ -4,7 +4,7 @@ import dash_html_components as html
 from dash.dependencies import Input, Output, State
 import plotly.graph_objs as go
 import pandas as pd
-import metric_calculations as mc
+from ..metrics_calculator import metrics_calculator
 
 def get_graph(roc_data):
 
@@ -57,7 +57,7 @@ def get_graph(roc_data):
         style={'width': '48%', 'display': 'inline-block'}
     )
 
-	
+    
 def get_cost_graph(roc_data):
 
     curve = go.Scatter(
@@ -94,8 +94,8 @@ def get_cost_graph(roc_data):
             )
         ],
         style={'width': '48%', 'display': 'inline-block'}
-    )	
-	
+    )   
+    
 def get_cost_graph_2():
     
     return html.Div([
@@ -103,7 +103,7 @@ def get_cost_graph_2():
         ],
         style={'width': '48%', 'display': 'inline-block'}
     )
-	
+    
 def set_cost_callback(app, df):
     @app.callback(Output('cost-curve', 'figure'),
               [Input('goto_cost_minimum', 'n_clicks')],
@@ -112,7 +112,7 @@ def set_cost_callback(app, df):
               )
     def update_cost_graph(n_clicks, fp_cost, fn_cost):
         print('df shape:', df.shape)
-        roc_df = mc.build_roc_data_fast(df, float(fp_cost), float(fn_cost))
+        roc_df = metric_calculator.build_roc_data_fast(df, float(fp_cost), float(fn_cost))
         print('roc_df shape:', roc_df.shape)
         curve = go.Scatter(
             x=roc_df['threshold'],
@@ -124,7 +124,7 @@ def set_cost_callback(app, df):
                 'size': 5,
                 'line': {'width': 0.5, 'color': 'white'}
             },
-        )	
+        )   
         print('curve built')
         figure={
             'data': [
@@ -139,5 +139,46 @@ def set_cost_callback(app, df):
                 hovermode='closest'
             )
         }
-		
+        
         return figure
+
+
+
+# import dash
+# import dash_core_components as dcc
+# import dash_html_components as html
+# import plotly.graph_objs as go
+# import pandas as pd
+
+
+# def get_graph(roc_data):
+
+#   return html.Div([
+#          dcc.Graph(
+#              id='roc-curve',
+#              figure={
+#                  'data': [
+#                      go.Scatter(
+#                          x=roc_data['FPR'],
+#                          y=roc_data['TPR'],
+#                          text='hello world',
+#                          mode='lines+markers',
+#                          opacity=0.7,
+#                          marker={
+#                              'size': 5,
+#                              'line': {'width': 0.5, 'color': 'white'}
+#                          },
+#                      )
+#                  ],
+#                  'layout': go.Layout(
+#                      xaxis={'type': 'linear', 'title': 'FPR'},
+#                      yaxis={'title': 'TPR'},
+#                     margin={'l': 40, 'b': 40, 't': 10, 'r': 10},
+#                      legend={'x': 0, 'y': 1},
+#                      hovermode='closest'
+#                  )
+#              }
+#          )
+#      ],
+#      style={'width': '48%', 'display': 'inline-block'}
+#  )

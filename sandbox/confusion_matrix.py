@@ -1,19 +1,12 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Sep 26 08:24:39 2017
-
-
-"""
-
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 import plotly.graph_objs as go
-import build_data as bd
-import metric_calculations as mc
+from src.data_builder import data_builder
+from src.metrics_calculator import metric_calculations as mc
 
-df = bd.create_sample_df()
+df = data_builder.create_sample_df()
 
 app = dash.Dash()
 

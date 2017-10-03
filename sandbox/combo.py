@@ -3,8 +3,8 @@ import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 import plotly.graph_objs as go
-import metric_calculations as mc
-import build_data
+from src.metrics_calculator import metrics_calculator as mc
+from src.data_builder import data_builder
 
 TP_COLOUR = '#e03344'
 FP_COLOUR = '#ef7b28'
@@ -16,7 +16,7 @@ FP_TEXT = 'false alarm'
 TN_TEXT = 'meh'
 FN_TEXT = 'miss'
 
-raw_data = build_data.create_sample_df()
+raw_data = data_builder.create_sample_df()
 roc_data = mc.build_roc_data_fast(raw_data)
 
 # Initialise App

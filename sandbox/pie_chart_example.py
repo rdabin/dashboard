@@ -8,8 +8,8 @@ import dash
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
-import build_data as bd
-import metric_calculations as mc
+from src.metrics_calculator import metrics_calculator as mc
+from src.data_builder import data_builder as bd
 
 TP_COLOUR = '#e03344'
 FP_COLOUR = '#ef7b28'

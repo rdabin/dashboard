@@ -2,15 +2,13 @@ import dash
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
-
-
 import plotly.graph_objs as go
 import pandas as pd
 import numpy as np
+from src.metrics_calculator import metrics_calculator as mc
+from src.data_builder import data_builder as bd
+from src.methods import methods as mt
 
-import metric_calculations as mc
-import methods as mt
-import build_data as bd
 
 app = dash.Dash()
 
